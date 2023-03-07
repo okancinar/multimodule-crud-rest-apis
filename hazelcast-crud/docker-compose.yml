@@ -1,0 +1,19 @@
+
+version: "3.9"
+
+services:
+  my-spring-boot-app:
+    image: hazelcast-crud
+    ports:
+      - "8080:8080"
+    environment:
+      - HAZELCAST_HOST=hazelcast
+      - HAZELCAST_PORT=5701
+    depends_on:
+      - hazelcast
+
+  hazelcast:
+    image: hazelcast/hazelcast:latest
+    ports:
+      - "5701:5701"
+      - "5702:5702"
