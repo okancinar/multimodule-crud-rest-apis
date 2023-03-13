@@ -43,14 +43,14 @@ public class UserController {
         return new ResponseEntity<User>(userService.getEmployeeById(id), HttpStatus.OK);
     }
 
-    /*
+
     @PutMapping("/edit/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user){ // id parametresiyle kaydı kontrol edeceiz eğer varsa yeni kaydı user nesnesine atacağız.
-        User resultUser = userService.updateUser(id,user);
-        return ResponseEntity.ok(resultUser);
+        userService.updateEmployee(id , user);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
         //Buraya kadar yazıp service katmanımızda bu metodu oluşturuyoruz.
     }
-    */
+
 
     @DeleteMapping("/remove/{id}")
     public void deleteById(@PathVariable Long id) {

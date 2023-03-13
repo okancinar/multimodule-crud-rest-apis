@@ -22,11 +22,12 @@ public class UserRepository {
     private final Map<Long, User> users;
 
     public UserRepository(HazelcastInstance hazelcastInstance) {
+
         this.users = hazelcastInstance.getMap("users");
     }
 
     public User save(User user) {
-        users.put(user.getId(), user);
+        users.putIfAbsent(user.getId(), user);
         return user;
     }
 
@@ -40,5 +41,7 @@ public class UserRepository {
     }
 
     public User deleteUser(Long id) {return users.remove(id);}
+
+    public User updateUser(Long id, User user) {users.put(id, user); return user;}
 
 }

@@ -5,6 +5,7 @@ import com.cinar.okan.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,11 @@ public class SpringBootRestApiApplication {
 	public User save(@RequestBody User user) {
 
 		return dao.save(user);
+	}
+	@PutMapping("/edit/{id}")
+	public User updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+		user.setId(id);
+		return dao.updateUser(id, user);
 	}
 
 	@GetMapping("getAll")

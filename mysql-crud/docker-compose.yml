@@ -4,7 +4,7 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: 'newdb'
+      MYSQL_DATABASE: 'mysql'
       # So you don't have to use root, but you can if you like
       MYSQL_USER: 'user'
       # You can use whatever password you like
@@ -13,7 +13,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'okan10189'
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - '3307:3306'
+      - '3306:3306'
     expose:
       # Opens port 3306 on the container
       - '3306'

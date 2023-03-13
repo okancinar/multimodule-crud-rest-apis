@@ -21,6 +21,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User update(Long id, User user) {
+        user.setId(id);
+        return userRepository.updateUser(id, user);
+    }
+
 
     public User findById(Long id) {
         return userRepository.findById(id);
@@ -30,9 +35,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-       public Boolean deleteUser(Long id) {
-
-           return userRepository.findAll().remove(id);
-       }
+    public Boolean deleteUser(Long id) {
+        return userRepository.findAll().remove(id);
+    }
 
 }

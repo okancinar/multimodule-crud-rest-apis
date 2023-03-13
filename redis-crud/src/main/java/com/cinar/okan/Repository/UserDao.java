@@ -18,7 +18,7 @@ public class UserDao {
 
     public User save(User user){
 
-        template.opsForHash().put(HASH_KEY, user.getId(),user);
+        template.opsForHash().putIfAbsent(HASH_KEY, user.getId(),user);
         return user;
 
     }
@@ -36,6 +36,12 @@ public class UserDao {
     public Boolean deleteUser(Long id){
         template.opsForHash().delete(HASH_KEY,id);
         return Boolean.TRUE;
+    }
+
+    public User updateUser(Long id, User user){
+        template.opsForHash().put(HASH_KEY, user.getId(), user);
+
+        return user;
     }
 
 

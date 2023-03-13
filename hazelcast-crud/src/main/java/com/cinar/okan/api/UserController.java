@@ -42,18 +42,19 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    /*
+
     @PutMapping("/edit/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user){ // id parametresiyle kaydı kontrol edeceiz eğer varsa yeni kaydı user nesnesine atacağız.
-        User resultUser = userService.updateUser(id,user);
+        User resultUser = userService.update(id, user);
+
         return ResponseEntity.ok(resultUser);
         //Buraya kadar yazıp service katmanımızda bu metodu oluşturuyoruz.
     }
-    */
+
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable("id") Long id) {
-        //ResponseEntity içine boolean değer yazdık eğer kayıt başarılı silinirse true, silinmezse false dönecek.
+
         Boolean status = userService.deleteUser(id);
         return ResponseEntity.ok(status);
     }
