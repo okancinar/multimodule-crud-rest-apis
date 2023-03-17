@@ -42,6 +42,12 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/getAllByLimit/{limit}")
+    public ResponseEntity<List<User>> getAllByLimit(@PathVariable int limit) {
+        List<User> users = userService.findAllByLimit(limit);
+        return ResponseEntity.ok(users);
+    }
+
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user){ // id parametresiyle kaydı kontrol edeceiz eğer varsa yeni kaydı user nesnesine atacağız.

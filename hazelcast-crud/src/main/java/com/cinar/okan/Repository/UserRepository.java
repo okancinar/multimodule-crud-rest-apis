@@ -44,4 +44,8 @@ public class UserRepository {
 
     public User updateUser(Long id, User user) {users.put(id, user); return user;}
 
+    public List<User> findAllByLimit(int limit) {
+        return new ArrayList<>(users.values().stream().limit(limit).toList());
+    }
+
 }

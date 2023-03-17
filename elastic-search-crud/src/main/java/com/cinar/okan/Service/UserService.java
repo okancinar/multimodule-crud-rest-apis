@@ -5,6 +5,10 @@ package com.cinar.okan.Service;
 import com.cinar.okan.Entity.User;
 import com.cinar.okan.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +24,11 @@ public class UserService {
         List<User> employees = new ArrayList<>();
         userRepository.findAll().forEach(employees::add);
         return employees;
+    }
+    public List<User> getAllEmployeesByLimit(int limit) {
+        Pageable pageable = PageRequest.of(0, limit, Sort.Direction.ASC, "id");
+        Page<User> results = userRepository.findAll(pageable);
+        return results.stream().toList();
     }
 
     public User getEmployeeById(Long id) {

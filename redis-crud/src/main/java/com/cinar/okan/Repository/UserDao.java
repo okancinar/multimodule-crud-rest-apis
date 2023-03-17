@@ -28,6 +28,9 @@ public class UserDao {
         return template.opsForHash().values(HASH_KEY);
     }
 
+    public List<User> findAllByLimit(int limit){
+        return template.opsForHash().values(HASH_KEY).stream().limit(limit).toList();
+    }
     public User findUserById(Long id){
 
         return (User) template.opsForHash().get(HASH_KEY,id);

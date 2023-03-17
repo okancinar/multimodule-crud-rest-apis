@@ -38,7 +38,10 @@ public class SpringBootRestApiApplication {
 
 		return dao.findAll();
 	}
-
+	@GetMapping("/getAllByLimit/{limit}")
+	public List<User> getAllByLimit(@PathVariable("limit") int limit) {
+		return dao.findAllByLimit(limit);
+	}
 	@GetMapping("/getById/{id}")
 	public User findProduct(@PathVariable Long id) {
 

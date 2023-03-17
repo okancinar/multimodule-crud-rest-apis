@@ -34,6 +34,7 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+    public List<User> findAllByLimit(int limit) {return userRepository.findAllByLimit(limit); }
 
     public Boolean deleteUser(Long id) {
         return userRepository.findAll().remove(id);
