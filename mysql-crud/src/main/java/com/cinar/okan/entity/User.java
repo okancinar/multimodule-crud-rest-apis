@@ -6,19 +6,18 @@ import lombok.Data;
 
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 @Data
 public class User {
 
     @Id
-    //primary key özelliğinin artırım stratejisini belirleriz
-    @SequenceGenerator(name = "user_seq_gen",sequenceName = "user_gen", initialValue = 100,allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "user_seq_gen")
-    //Burayı tam anlamadım 
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "ID")
     private Long id;
-    @Column(name = "FIRST NAME" , length = 100)
+    @Column(name = "first_name" , length = 100)
     private String firstName;
-    @Column(name = "LAST NAME", length = 100)
+    @Column(name = "last_name", length = 100)
     private String lastName;
 }

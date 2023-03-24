@@ -3,18 +3,19 @@ package com.cinar.okan.service.impl;
 import com.cinar.okan.entity.User;
 import com.cinar.okan.repository.UserRepository;
 import com.cinar.okan.service.UserService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor // User controller classındaki elle yazdığımız constructora gerek olmadan Lombok sayesinde ekliyoruz.
-//Servis katmanı olduğunu belirtmerk için bir service anotasyonu ekliyoruz.
 public class UserServiceImpl implements UserService {
-
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Override
@@ -22,9 +23,23 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+
+    public Page<User> getAllByLimit(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepository.findAll(pageable);
+    }
+
+
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+
+
+    @Override
+    public List<User> getUser() {
+        return null;
     }
 
     @Override
@@ -33,10 +48,9 @@ public class UserServiceImpl implements UserService {
         // böyle bir kullanıcı olu olmadığını kontrol ediyoruz. Optionalı ve if i o yüzden ekledik.
         Optional<User> user = userRepository.findById(id);
 
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             return user.get();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -46,12 +60,11 @@ public class UserServiceImpl implements UserService {
         // böyle bir kullanıcı olu olmadığını kontrol ediyoruz. Optionalı ve if i o yüzden ekledik.
         Optional<User> resultUser = userRepository.findById(id);
 
-        if(resultUser.isPresent()) {
+        if (resultUser.isPresent()) {
             resultUser.get().setFirstName(user.getFirstName());
             resultUser.get().setLastName(user.getLastName());
             return userRepository.save(resultUser.get());
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -61,11 +74,10 @@ public class UserServiceImpl implements UserService {
         // böyle bir kullanıcı olu olmadığını kontrol ediyoruz. Optionalı ve if i o yüzden ekledik.
         Optional<User> user = userRepository.findById(id);
 
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             userRepository.deleteById((id));
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
