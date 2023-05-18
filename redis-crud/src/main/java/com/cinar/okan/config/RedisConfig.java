@@ -33,9 +33,6 @@ public class RedisConfig {
     }
 
 
-
-
-
     @Bean
 
     public RedisTemplate<String, Object> template() {

@@ -15,7 +15,7 @@ public class HazelcastConfig {
 
 
 
-
+//@Bean gerekli. Şuan yml dosyası bu işlevi görüyor.
     public HazelcastInstance hazelcastInstance() {
         ClientConfig clientConfig = new ClientConfig();
         clientConfig.setNetworkConfig(new ClientNetworkConfig().addAddress("localhost:5701"));
